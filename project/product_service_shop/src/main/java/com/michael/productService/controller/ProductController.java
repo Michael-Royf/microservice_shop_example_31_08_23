@@ -23,7 +23,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/create")
-    public ResponseEntity<ProductResponse> createProduct(@RequestBody @Valid  ProductRequest productRequest) {
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody @Valid ProductRequest productRequest) {
         return new ResponseEntity<>(productService.createProduct(productRequest), CREATED);
     }
 
@@ -48,6 +48,14 @@ public class ProductController {
     @DeleteMapping("/remove/{productId}")
     public ResponseEntity<MessageResponse> deleteProductById(@PathVariable("productId") Long productId) {
         return new ResponseEntity<>(productService.deleteProduct(productId), OK);
+    }
+
+
+    @PutMapping("/reduceQuantity/{productId}")
+    public ResponseEntity<Void> reduceQuantity(@PathVariable(name = "productId") Long productId,
+                                               @RequestParam(name = "quantity") Long quantity) {
+        productService.reduceQuantity(productId, quantity);
+        return new ResponseEntity<>(OK);
     }
 
 

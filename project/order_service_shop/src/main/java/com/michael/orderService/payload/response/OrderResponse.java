@@ -1,5 +1,7 @@
 package com.michael.orderService.payload.response;
 
+import com.michael.clients.payment.PaymentResponse;
+import com.michael.clients.product.ProductResponse;
 import lombok.*;
 
 import java.time.Instant;
@@ -11,9 +13,9 @@ import java.time.Instant;
 @Builder
 public class OrderResponse {
     private Long id;
-    private Long productId;
-    private Long quantity;
     private Instant orderDate;
     private String orderStatus;
     private Long amount;
+    private ProductResponse productResponse;
+    private PaymentResponse paymentResponse;
 }

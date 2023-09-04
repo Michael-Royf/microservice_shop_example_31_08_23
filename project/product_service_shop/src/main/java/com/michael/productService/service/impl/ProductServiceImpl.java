@@ -80,7 +80,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void reduceQuantity(Long productId, Long quantity) {
+        log.info("Reduce Quantity {} for id: {}", quantity, productId);
 
+        Product productFromDb = getProductFromDb(productId);
+        if (productFromDb.getQuantity() < quantity) {
+            throw new RuntimeException(INSUFFICIENT_QUANTITY);
+        }
+        productFromDb.setQuantity(productFromDb.getQuantity() - quantity);
+        productRepository.save(productFromDb);
+        log.info("Product Quantity Updated Successfully");
     }
 
 

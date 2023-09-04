@@ -1,4 +1,4 @@
-package com.michael.orderService.payload.request;
+package com.michael.clients.payment;
 
 public enum PaymentMode {
     CASH,

@@ -37,6 +37,12 @@ public class GlobalExceptionHandling extends ResponseEntityExceptionHandler {
         return createHttpResponse(BAD_REQUEST, ex.getMessage());
     }
 
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleMethodOrderNotFoundException(OrderNotFoundException ex) {
+        return createHttpResponse(NOT_FOUND, ex.getMessage());
+    }
+
     @ExceptionHandler(IOException.class)
     public ResponseEntity<ExceptionResponse> iOException(IOException exception) {
         log.error(exception.getMessage());
@@ -48,15 +54,11 @@ public class GlobalExceptionHandling extends ResponseEntityExceptionHandler {
         return createHttpResponse(BAD_REQUEST, ex.getMessage());
     }
 
-//    @ExceptionHandler(ProductAlreadyExistsException.class)
-//    public ResponseEntity<ExceptionResponse> handleMethodProductAlreadyExistsException(ProductAlreadyExistsException ex) {
-//        return createHttpResponse(CONFLICT, ex.getMessage());
-//    }
-//
-//    @ExceptionHandler(ProductNotFoundException.class)
-//    public ResponseEntity<ExceptionResponse> handleMethodProductNotFoundException(ProductNotFoundException ex) {
-//        return createHttpResponse(NOT_FOUND, ex.getMessage());
-//    }
+
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<ExceptionResponse> handleCustomException(CustomException exception) {
+             return createHttpResponse(BAD_REQUEST, exception.getMessage());
+    }
 
 
     @Override
