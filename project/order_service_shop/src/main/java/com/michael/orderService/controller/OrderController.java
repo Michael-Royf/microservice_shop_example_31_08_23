@@ -5,6 +5,7 @@ import com.michael.orderService.payload.response.OrderResponse;
 import com.michael.orderService.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,8 @@ import static org.springframework.http.HttpStatus.OK;
 public class OrderController {
 
     private final OrderService orderService;
+    @Value("${spring.boot.message}")
+    private String hello;
 
 
     @PostMapping("/placeOrder")
@@ -27,6 +30,11 @@ public class OrderController {
     @GetMapping("/get/{orderId}")
     public ResponseEntity<OrderResponse> getOrderDetails(@PathVariable("orderId") Long orderId){
         return new ResponseEntity<>(orderService.getOrderDetailsById(orderId), OK);
+    }
+
+    @GetMapping("/hello")
+    public String hello (){
+        return  hello;
     }
 
 }
